@@ -1,4 +1,4 @@
-import SideBar from "@/components/SideBar";
+import SideBar from "@/app/layouts/SideBar";
 export default function Home() {
-  return <SideBar />;
+  return <></>;
 }
