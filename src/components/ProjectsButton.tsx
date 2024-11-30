@@ -7,7 +7,7 @@ import { twMerge } from "tailwind-merge";
 export default function ProjectsButton(
   props: {
     title: string;
-    index?: number;
+    index?: string;
   } & ButtonHTMLAttributes<HTMLButtonElement>
 ) {
   const [hover, setHover] = useState(true);

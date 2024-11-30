@@ -4,7 +4,7 @@ import { twMerge } from "tailwind-merge";
 export default function Button(
   props: {
     title: string;
-    index?: number;
+    index?: string;
   } & ButtonHTMLAttributes<HTMLButtonElement>
 ) {
   const { className, title, index, children, ...others } = props;

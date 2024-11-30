@@ -19,11 +19,11 @@ import ProjectsButton from "@/components/ProjectsButton";
 import SideBarHeader from "@/components/SideBarHeader";
 
 const sidebarMainBtn = [
-  { Icon: Search, title: "Search", index: undefined },
+  { Icon: Search, title: "Search", index: "" },
   { Icon: Inbox, title: "Inbox", index: 3 },
   { Icon: Calendar, title: "Today", index: 5 },
-  { Icon: CalendarDays, title: "Upcoming", index: undefined },
-  { Icon: LayoutGrid, title: "Filters & Labels", index: undefined },
+  { Icon: CalendarDays, title: "Upcoming", index: "" },
+  { Icon: LayoutGrid, title: "Filters & Labels", index: "" },
 ];
 
 const sidebarProjects = [
@@ -84,13 +84,13 @@ export default function SideBar() {
           >
             <div>
               <SideBarHeader close={close} setClose={setClose} />
-              <button className="flex w-full text-emerald-400 items-center gap-2 px-2 h-9 mb-2 rounded-md mt-5 hover:bg-neutral-700/70 transition-colors cursor-pointer">
+              <button className="flex w-full text-red-400 items-center gap-2 px-2 h-9 mb-2 rounded-md mt-5 hover:bg-neutral-700/70 transition-colors cursor-pointer">
                 <CirclePlus strokeWidth={1} />
                 <span className="font-medium">Add task</span>
               </button>
 
               {sidebarMainBtn.map(({ title, Icon, index }) => (
-                <Button key={title} title={title} index={index}>
+                <Button key={title} title={title} index={String(index)}>
                   <Icon strokeWidth={1} className="size-5 text-neutral-400" />
                 </Button>
               ))}
@@ -133,7 +133,11 @@ export default function SideBar() {
               {hide && (
                 <div>
                   {sidebarProjects.map(({ title, index }) => (
-                    <ProjectsButton key={title} title={title} index={index} />
+                    <ProjectsButton
+                      key={title}
+                      title={title}
+                      index={String(index)}
+                    />
                   ))}
                 </div>
               )}
