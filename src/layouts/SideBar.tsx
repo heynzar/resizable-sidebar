@@ -17,13 +17,19 @@ import {
 import Button from "@/components/Button";
 import ProjectsButton from "@/components/ProjectsButton";
 import SideBarHeader from "@/components/SideBarHeader";
+import Link from "next/link";
+import { usePathname } from "next/navigation";
 
 const sidebarMainBtn = [
-  { Icon: Search, title: "Search", index: "" },
-  { Icon: Inbox, title: "Inbox", index: 3 },
-  { Icon: Calendar, title: "Today", index: 5 },
-  { Icon: CalendarDays, title: "Upcoming", index: "" },
-  { Icon: LayoutGrid, title: "Filters & Labels", index: "" },
+  { Icon: Inbox, title: "Inbox", index: 3, link: "inbox" },
+  { Icon: Calendar, title: "Today", index: 5, link: "today" },
+  { Icon: CalendarDays, title: "Upcoming", index: "", link: "upcoming" },
+  {
+    Icon: LayoutGrid,
+    title: "Filters & Labels",
+    index: "",
+    link: "filters-labels",
+  },
 ];
 
 const sidebarProjects = [
@@ -33,6 +39,8 @@ const sidebarProjects = [
 ];
 
 export default function SideBar() {
+  const pathname = usePathname().split("/").pop();
+
   const [hide, setHide] = useState(true);
   const [close, setClose] = useState(true);
   const [track, setTrack] = useState(false);
@@ -89,10 +97,28 @@ export default function SideBar() {
                 <span className="font-medium">Add task</span>
               </button>
 
-              {sidebarMainBtn.map(({ title, Icon, index }) => (
-                <Button key={title} title={title} index={String(index)}>
-                  <Icon strokeWidth={1} className="size-5 text-neutral-400" />
-                </Button>
+              <Button title="Search">
+                <Search strokeWidth={1} className="size-5 text-neutral-400" />
+              </Button>
+
+              {sidebarMainBtn.map(({ title, Icon, index, link }) => (
+                <Link href={`/${link}`} key={title}>
+                  <Button
+                    title={title}
+                    index={String(index)}
+                    className={`${
+                      pathname === link
+                        ? "text-red-400  bg-red-600/30 hover:bg-red-600/30"
+                        : "text-white  "
+                    }`}
+                  >
+                    <Icon
+                      strokeWidth={`${pathname === link ? 2 : 1}`}
+                      color={`${pathname === link ? "#f87171" : "#a1a1aa"}`}
+                      className="size-5"
+                    />
+                  </Button>
+                </Link>
               ))}
 
               <button
