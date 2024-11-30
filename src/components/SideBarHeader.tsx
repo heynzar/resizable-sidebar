@@ -1,9 +1,16 @@
+"use client";
+
 import { Bell, ChevronDown, PanelRight } from "lucide-react";
 import Image from "next/image";
 import profile from "@/assets/profile.jpg";
 import Link from "next/link";
 
-export default function SideBarHeader() {
+interface SideBarHeaderProps {
+  close: boolean;
+  setClose: (value: boolean) => void;
+}
+
+const SideBarHeader: React.FC<SideBarHeaderProps> = ({ close, setClose }) => {
   return (
     <div id="header" className="flex justify-between items-center">
       <div
@@ -30,6 +37,7 @@ export default function SideBarHeader() {
           </div>
         </Link>
         <div
+          onClick={() => setClose(!close)}
           id="open-close-side-bar"
           className="rounded-md size-8 p-1 flex items-center justify-center hover:bg-neutral-700/70 transition-colors cursor-pointer"
         >
@@ -38,4 +46,6 @@ export default function SideBarHeader() {
       </div>
     </div>
   );
-}
+};
+
+export default SideBarHeader;
