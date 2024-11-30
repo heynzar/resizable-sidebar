@@ -26,14 +26,14 @@ export default function SideBarHeader() {
             id="notifications"
             className="rounded-md size-8 p-1 flex items-center justify-center hover:bg-neutral-700/70 transition-colors cursor-pointer"
           >
-            <Bell strokeWidth={1} />
+            <Bell strokeWidth={1} className="size-6" />
           </div>
         </Link>
         <div
           id="open-close-side-bar"
           className="rounded-md size-8 p-1 flex items-center justify-center hover:bg-neutral-700/70 transition-colors cursor-pointer"
         >
-          <PanelRight strokeWidth={1} className="rotate-180" />
+          <PanelRight strokeWidth={1} className="rotate-180 size-6" />
         </div>
       </div>
     </div>
