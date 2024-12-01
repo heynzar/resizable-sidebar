@@ -1,4 +1,10 @@
 import { useEffect, useRef, useState } from "react";
+import Link from "next/link";
+import ProjectsButton from "@/components/ProjectsButton";
+import Button from "./Button";
+import { twMerge } from "tailwind-merge";
+import { usePathname } from "next/navigation";
+
 import {
   ChevronDown,
   Plus,
@@ -11,10 +17,6 @@ import {
   Archive,
   Trash2,
 } from "lucide-react";
-import Link from "next/link";
-import ProjectsButton from "@/components/ProjectsButton";
-import Button from "./Button";
-import { twMerge } from "tailwind-merge";
 
 const sidebarProjects = [
   { title: "Financial", index: 4, link: "financial" },
@@ -34,6 +36,8 @@ const ProjectsSettings = [
 ];
 
 export default function Projects() {
+  const pathname = usePathname().split("/").pop();
+
   const [hideProjectsSettings, setHideProjectsSettings] = useState(false);
   const [hide, setHide] = useState(true);
   const [hover, setHover] = useState(false);
@@ -70,9 +74,11 @@ export default function Projects() {
 
       <Link href={"/projects/active"}>
         <button
+          className={`flex w-full text-white items-center justify-between px-2 h-9 my-2 rounded-md mt-5 hover:bg-neutral-700/70 transition-colors cursor-pointer ${
+            pathname === "active" && "bg-red-600/30 hover:bg-red-600/30"
+          }`}
           onMouseEnter={() => setHover(true)}
           onMouseLeave={() => setHover(false)}
-          className="flex w-full text-white items-center justify-between px-2 h-9 my-2 rounded-md mt-5 hover:bg-neutral-700/70 transition-colors cursor-pointer"
         >
           <span className="font-medium">My Projects</span>
 
@@ -103,6 +109,11 @@ export default function Projects() {
           {sidebarProjects.map(({ title, index, link }) => (
             <Link href={`/projects/${link}`} key={title}>
               <ProjectsButton
+                className={`${
+                  pathname === link
+                    ? "text-red-400  bg-red-600/30 hover:bg-red-600/30"
+                    : "text-white  "
+                }`}
                 title={title}
                 index={String(index)}
                 hideProjectsSettings={hideProjectsSettings}
@@ -116,12 +127,7 @@ export default function Projects() {
       {hideProjectsSettings && (
         <div
           ref={settingsRef}
-          style={{
-            position: "absolute",
-            top: "-110px",
-            left: "310px",
-          }}
-          className="rounded-xl  border border-white/15 w-[280px] bg-neutral-800 z-20"
+          className="rounded-xl absolute top-[-180px] md:top-[-110px] left-[80px] md:left-[310px]  border border-white/15 w-[280px] bg-neutral-800 z-20"
         >
           <div className=" p-1.5">
             {ProjectsSettings.slice(0, 2).map(({ title, Icon }) => (

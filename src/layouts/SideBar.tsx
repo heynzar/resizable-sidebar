@@ -58,7 +58,7 @@ export default function SideBar() {
   }, [track]);
 
   return (
-    <aside className="select-none">
+    <aside className="select-none absolute shadow-md md:static md:shadow-none">
       {!close && (
         <div className="m-4 mr-0">
           <div
@@ -75,7 +75,7 @@ export default function SideBar() {
           <div
             style={{ width }}
             className={twMerge(
-              "min-w-[220px]  max-w-[410px] h-screen flex flex-col justify-between text-sm bg-neutral-800 border-r border-white/10 p-3 pb-1"
+              "min-w-[220px]  max-w-[410px] max-h-[100dvh] flex flex-col justify-between text-sm bg-neutral-800 border-r border-white/10 p-3 pb-1"
             )}
           >
             <div>

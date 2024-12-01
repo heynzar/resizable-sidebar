@@ -1,5 +1,11 @@
 "use client";
 
+import Image from "next/image";
+import profile from "@/assets/profile.jpg";
+import Link from "next/link";
+import { useEffect, useRef, useState } from "react";
+import Button from "./Button";
+
 import {
   BadgeCheck,
   Bell,
@@ -15,11 +21,6 @@ import {
   Settings,
   SquareActivity,
 } from "lucide-react";
-import Image from "next/image";
-import profile from "@/assets/profile.jpg";
-import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
-import Button from "./Button";
 
 interface SideBarHeaderProps {
   close: boolean;
