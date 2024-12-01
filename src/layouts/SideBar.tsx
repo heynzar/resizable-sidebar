@@ -33,9 +33,9 @@ const sidebarMainBtn = [
 ];
 
 const sidebarProjects = [
-  { title: "Financial", index: 4 },
-  { title: "Academic", index: 3 },
-  { title: "Daily Challenges", index: 5 },
+  { title: "Financial", index: 4, link: "financial" },
+  { title: "Academic", index: 3, link: "academic" },
+  { title: "Daily Challenges", index: 5, link: "daily-challenges" },
 ];
 
 export default function SideBar() {
@@ -121,49 +121,48 @@ export default function SideBar() {
                 </Link>
               ))}
 
-              <button
-                onMouseEnter={() => {
-                  setHover(!hover);
-                }}
-                onMouseLeave={() => {
-                  setHover(!hover);
-                }}
-                className="flex w-full text-white items-center justify-between px-2 h-9 my-2 rounded-md mt-5 hover:bg-neutral-700/70 transition-colors cursor-pointer"
-              >
-                <span className="font-medium">My Projects</span>
+              <Link href={"/projects/active"}>
+                <button
+                  onMouseEnter={() => {
+                    setHover(!hover);
+                  }}
+                  onMouseLeave={() => {
+                    setHover(!hover);
+                  }}
+                  className="flex w-full text-white items-center justify-between px-2 h-9 my-2 rounded-md mt-5 hover:bg-neutral-700/70 transition-colors cursor-pointer"
+                >
+                  <span className="font-medium">My Projects</span>
 
-                {hover && (
-                  <div className="flex items-center gap-1">
-                    <div className="p-0.5 rounded flex items-center justify-center">
-                      <Plus
-                        className="size-6 hover:text-white/80"
-                        strokeWidth={1}
-                      />
+                  {hover && (
+                    <div className="flex items-center gap-1 transition">
+                      <div className="p-0.5 rounded flex items-center justify-center">
+                        <Plus
+                          className="size-6 hover:text-white/80"
+                          strokeWidth={1}
+                        />
+                      </div>
+                      <div
+                        onClick={() => setHide(!hide)}
+                        className="p-0.5 rounded flex items-center justify-center"
+                      >
+                        <ChevronDown
+                          className={twMerge(
+                            "size-6 hover:text-white/80 transition-transform",
+                            hide ? "rotate-0" : "-rotate-90"
+                          )}
+                          strokeWidth={1}
+                        />
+                      </div>
                     </div>
-                    <div
-                      onClick={() => setHide(!hide)}
-                      className="p-0.5 rounded flex items-center justify-center"
-                    >
-                      <ChevronDown
-                        className={twMerge(
-                          "size-6 hover:text-white/80 transition-transform",
-                          hide ? "rotate-0" : "-rotate-90"
-                        )}
-                        strokeWidth={1}
-                      />
-                    </div>
-                  </div>
-                )}
-              </button>
-
+                  )}
+                </button>
+              </Link>
               {hide && (
                 <div>
-                  {sidebarProjects.map(({ title, index }) => (
-                    <ProjectsButton
-                      key={title}
-                      title={title}
-                      index={String(index)}
-                    />
+                  {sidebarProjects.map(({ title, index, link }) => (
+                    <Link href={`/projects/${link}`} key={title}>
+                      <ProjectsButton title={title} index={String(index)} />
+                    </Link>
                   ))}
                 </div>
               )}
