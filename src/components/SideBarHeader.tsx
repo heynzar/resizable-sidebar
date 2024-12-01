@@ -40,6 +40,7 @@ const profileSettings = [
 
 const SideBarHeader: React.FC<SideBarHeaderProps> = ({ close, setClose }) => {
   const [openProfileSettings, setOpenProfileSettings] = useState(false);
+
   return (
     <div id="header" className="flex justify-between items-center">
       <div
@@ -60,7 +61,7 @@ const SideBarHeader: React.FC<SideBarHeaderProps> = ({ close, setClose }) => {
 
       {openProfileSettings && (
         <div
-          className="absolute top-12 left-3 rounded-xl border border-white/15 w-[280px]  bg-neutral-800"
+          className="absolute z-50 top-12 left-3 rounded-xl border border-white/15 w-[280px]  bg-neutral-800"
           id="profile-settings"
         >
           <div className="p-1.5 ">

@@ -19,3 +19,16 @@ body {
   background: var(--background);
   font-family: Arial, Helvetica, sans-serif;
 }
+
+.child {
+  display: none;
+}
+.child2 {
+  display: flex;
+}
+.parent:hover .child {
+  display: flex;
+}
+.parent:hover .child2 {
+  display: none;
+}
