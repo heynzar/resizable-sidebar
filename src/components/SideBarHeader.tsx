@@ -18,7 +18,7 @@ import {
 import Image from "next/image";
 import profile from "@/assets/profile.jpg";
 import Link from "next/link";
-import { useState } from "react";
+import { useEffect, useRef, useState } from "react";
 import Button from "./Button";
 
 interface SideBarHeaderProps {
@@ -40,9 +40,35 @@ const profileSettings = [
 
 const SideBarHeader: React.FC<SideBarHeaderProps> = ({ close, setClose }) => {
   const [openProfileSettings, setOpenProfileSettings] = useState(false);
+  const projectsRef = useRef<HTMLDivElement>(null);
+
+  useEffect(() => {
+    const handleClickOutside = (event: MouseEvent) => {
+      if (
+        projectsRef.current &&
+        !projectsRef.current.contains(event.target as Node)
+      ) {
+        setOpenProfileSettings(false);
+      }
+    };
+
+    if (openProfileSettings) {
+      document.addEventListener("mousedown", handleClickOutside);
+    }
+
+    return () => {
+      document.removeEventListener("mousedown", handleClickOutside);
+    };
+  }, [openProfileSettings]);
 
   return (
     <div id="header" className="flex justify-between items-center">
+      {openProfileSettings && (
+        <div
+          className="fixed inset-0 bg-black/20 z-10"
+          onClick={() => setOpenProfileSettings(false)}
+        />
+      )}
       <div
         onClick={() => setOpenProfileSettings(!openProfileSettings)}
         id="profile"
@@ -61,6 +87,7 @@ const SideBarHeader: React.FC<SideBarHeaderProps> = ({ close, setClose }) => {
 
       {openProfileSettings && (
         <div
+          ref={projectsRef}
           className="absolute z-50 top-12 left-3 rounded-xl border border-white/15 w-[280px]  bg-neutral-800"
           id="profile-settings"
         >
