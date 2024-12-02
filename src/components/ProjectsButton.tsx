@@ -1,3 +1,5 @@
+"use client";
+
 import { Ellipsis, Hash } from "lucide-react";
 import { ButtonHTMLAttributes, useEffect, useRef, useState } from "react";
 import { twMerge } from "tailwind-merge";
@@ -28,17 +30,11 @@ const ProjectsSettings = [
 export default function ProjectsButton(
   props: {
     title: string;
+    width: string;
     index?: string;
   } & ButtonHTMLAttributes<HTMLButtonElement>
 ) {
-  const {
-    className,
-    title,
-    index,
-
-    ...others
-  } = props;
-
+  const { className, title, width, index, ...others } = props;
   const [hideProjectsSettings, setHideProjectsSettings] = useState(false);
   const settingsRef = useRef<HTMLDivElement>(null);
 
@@ -71,7 +67,7 @@ export default function ProjectsButton(
       )}
       <button
         className={twMerge(
-          "relative flex w-full text-white items-center justify-between pl-3 h-9 rounded-md  hover:bg-neutral-700/70 transition-colors cursor-pointer parent",
+          "flex w-full text-white items-center justify-between pl-3 h-9 rounded-md  hover:bg-neutral-700/70 transition-colors cursor-pointer parent",
           className
         )}
         {...others}
@@ -86,43 +82,48 @@ export default function ProjectsButton(
         </span>
 
         <div
+          id="ellipsis"
           onClick={() => setHideProjectsSettings(!hideProjectsSettings)}
           className="hover:bg-neutral-600/70 transition-colors p-0.5 mr-1 rounded flex items-center justify-center child"
         >
           <Ellipsis strokeWidth={1} className="size-6 text-white" />
         </div>
-
-        {hideProjectsSettings && (
-          <div
-            ref={settingsRef}
-            className="rounded-xl absolute bottom-10 md:bottom-[-80px] left-[50px] md:right-[-300px]  border border-white/15 w-[280px] bg-neutral-800 z-20"
-          >
-            <div className=" p-1.5">
-              {ProjectsSettings.slice(0, 2).map(({ title, Icon }) => (
-                <Button key={title} title={title}>
-                  <Icon strokeWidth={1} className="size-5 text-neutral-400" />
-                </Button>
-              ))}
-            </div>
-            <div className="border-t border-white/15 p-1.5">
-              {ProjectsSettings.slice(2, 5).map(({ title, Icon }) => (
-                <Button key={title} title={title}>
-                  <Icon strokeWidth={1} className="size-5 text-neutral-400" />
-                </Button>
-              ))}
-            </div>
-            <div className="border-t border-white/15 p-1.5">
-              <Button key={"archive"} title={"Archive"}>
-                <Archive strokeWidth={1} className="size-5 text-neutral-400" />
-              </Button>
-
-              <Button key={"delete"} title={"Delete"} className="text-red-400">
-                <Trash2 strokeWidth={1} className="size-5 " />
-              </Button>
-            </div>
-          </div>
-        )}
       </button>
+      {hideProjectsSettings && (
+        <div
+          id="projects-settings"
+          ref={settingsRef}
+          className={twMerge(
+            "rounded-xl absolute bottom-10 md:bottom-[-40px] left-10 border border-white/15 w-[280px] bg-neutral-800 z-20",
+            `md:left-[${width}]`
+          )}
+          style={{ left: `${width}` }}
+        >
+          <div className=" p-1.5">
+            {ProjectsSettings.slice(0, 2).map(({ title, Icon }) => (
+              <Button key={title} title={title}>
+                <Icon strokeWidth={1} className="size-5 text-neutral-400" />
+              </Button>
+            ))}
+          </div>
+          <div className="border-t border-white/15 p-1.5">
+            {ProjectsSettings.slice(2, 5).map(({ title, Icon }) => (
+              <Button key={title} title={title}>
+                <Icon strokeWidth={1} className="size-5 text-neutral-400" />
+              </Button>
+            ))}
+          </div>
+          <div className="border-t border-white/15 p-1.5">
+            <Button key={"archive"} title={"Archive"}>
+              <Archive strokeWidth={1} className="size-5 text-neutral-400" />
+            </Button>
+
+            <Button key={"delete"} title={"Delete"} className="text-red-400">
+              <Trash2 strokeWidth={1} className="size-5 " />
+            </Button>
+          </div>
+        </div>
+      )}
     </div>
   );
 }

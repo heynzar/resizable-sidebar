@@ -1,10 +1,10 @@
 import { useState } from "react";
-import Link from "next/link";
-import ProjectsButton from "@/components/ProjectsButton";
-import { twMerge } from "tailwind-merge";
 import { usePathname } from "next/navigation";
-
+import Link from "next/link";
+import { twMerge } from "tailwind-merge";
 import { ChevronDown, Plus } from "lucide-react";
+
+import ProjectsButton from "@/components/ProjectsButton";
 
 const sidebarProjects = [
   { title: "Financial", index: 4, link: "financial" },
@@ -12,16 +12,13 @@ const sidebarProjects = [
   { title: "Daily Challenges", index: 5, link: "daily-challenges" },
 ];
 
-export default function Projects() {
+export default function Projects({ width }: { width: string }) {
   const pathname = usePathname().split("/").pop();
-
   const [hide, setHide] = useState(true);
   const [hover, setHover] = useState(false);
 
   return (
     <div className="relative">
-      {/* Overlay to block interactions when hideProjectsSettings is true */}
-
       <Link href={"/projects/active"}>
         <button
           className={`flex w-full text-white items-center justify-between px-2 h-9 my-2 rounded-md mt-5 hover:bg-neutral-700/70 transition-colors cursor-pointer ${
@@ -66,6 +63,7 @@ export default function Projects() {
                 }`}
                 title={title}
                 index={String(index)}
+                width={width}
               />
             </Link>
           ))}

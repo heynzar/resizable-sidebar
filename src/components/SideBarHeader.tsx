@@ -165,7 +165,7 @@ const SideBarHeader: React.FC<SideBarHeaderProps> = ({ close, setClose }) => {
         <div
           onClick={() => setClose(!close)}
           id="open-close-side-bar"
-          className="rounded-md size-8 p-1 flex items-center justify-center hover:bg-neutral-700/70 active:scale-95 transition-all transition-colors cursor-pointer"
+          className="rounded-md size-8 p-1 flex items-center justify-center hover:bg-neutral-700/70 active:scale-95 transition-all cursor-pointer"
         >
           <PanelRight strokeWidth={1} className="rotate-180 size-6" />
         </div>

@@ -108,7 +108,7 @@ export default function SideBar() {
                   </Button>
                 </Link>
               ))}
-              <Projects />
+              <Projects width={width} />
             </div>
             <button className="flex w-full text-neutral-100 items-center gap-2 px-2 h-9 mb-2 rounded-md mt-5 hover:bg-neutral-700/70 transition-colors cursor-pointer">
               <SwatchBook strokeWidth={1} className="size-5" />
