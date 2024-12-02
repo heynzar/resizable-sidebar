@@ -1,22 +1,10 @@
-import { useEffect, useRef, useState } from "react";
+import { useState } from "react";
 import Link from "next/link";
 import ProjectsButton from "@/components/ProjectsButton";
-import Button from "./Button";
 import { twMerge } from "tailwind-merge";
 import { usePathname } from "next/navigation";
 
-import {
-  ChevronDown,
-  Plus,
-  ArrowUpFromLine,
-  ArrowDownFromLine,
-  Pencil,
-  Star,
-  CopyPlus,
-  UserRoundPlus,
-  Archive,
-  Trash2,
-} from "lucide-react";
+import { ChevronDown, Plus } from "lucide-react";
 
 const sidebarProjects = [
   { title: "Financial", index: 4, link: "financial" },
@@ -24,53 +12,15 @@ const sidebarProjects = [
   { title: "Daily Challenges", index: 5, link: "daily-challenges" },
 ];
 
-const ProjectsSettings = [
-  { Icon: ArrowUpFromLine, title: "Add project above" },
-  { Icon: ArrowDownFromLine, title: "Add project below" },
-  { Icon: Pencil, title: "Edit" },
-  { Icon: Star, title: "Add to favorites" },
-  { Icon: CopyPlus, title: "Duplicate" },
-  { Icon: UserRoundPlus, title: "Share" },
-  { Icon: Archive, title: "Archive" },
-  { Icon: Trash2, title: "Delete" },
-];
-
 export default function Projects() {
   const pathname = usePathname().split("/").pop();
 
-  const [hideProjectsSettings, setHideProjectsSettings] = useState(false);
   const [hide, setHide] = useState(true);
   const [hover, setHover] = useState(false);
-  const settingsRef = useRef<HTMLDivElement>(null);
-
-  useEffect(() => {
-    const handleClickOutside = (event: MouseEvent) => {
-      if (
-        settingsRef.current &&
-        !settingsRef.current.contains(event.target as Node)
-      ) {
-        setHideProjectsSettings(false);
-      }
-    };
-
-    if (hideProjectsSettings) {
-      document.addEventListener("mousedown", handleClickOutside);
-    }
-
-    return () => {
-      document.removeEventListener("mousedown", handleClickOutside);
-    };
-  }, [hideProjectsSettings]);
 
   return (
     <div className="relative">
       {/* Overlay to block interactions when hideProjectsSettings is true */}
-      {hideProjectsSettings && (
-        <div
-          className="fixed inset-0 bg-black/20 z-10"
-          onClick={() => setHideProjectsSettings(false)}
-        />
-      )}
 
       <Link href={"/projects/active"}>
         <button
@@ -116,42 +66,9 @@ export default function Projects() {
                 }`}
                 title={title}
                 index={String(index)}
-                hideProjectsSettings={hideProjectsSettings}
-                setHideProjectsSettings={setHideProjectsSettings}
               />
             </Link>
           ))}
-        </div>
-      )}
-
-      {hideProjectsSettings && (
-        <div
-          ref={settingsRef}
-          className="rounded-xl absolute top-[-180px] md:top-[-110px] left-[80px] md:left-[310px]  border border-white/15 w-[280px] bg-neutral-800 z-20"
-        >
-          <div className=" p-1.5">
-            {ProjectsSettings.slice(0, 2).map(({ title, Icon }) => (
-              <Button key={title} title={title}>
-                <Icon strokeWidth={1} className="size-5 text-neutral-400" />
-              </Button>
-            ))}
-          </div>
-          <div className="border-t border-white/15 p-1.5">
-            {ProjectsSettings.slice(2, 5).map(({ title, Icon }) => (
-              <Button key={title} title={title}>
-                <Icon strokeWidth={1} className="size-5 text-neutral-400" />
-              </Button>
-            ))}
-          </div>
-          <div className="border-t border-white/15 p-1.5">
-            <Button key={"archive"} title={"Archive"}>
-              <Archive strokeWidth={1} className="size-5 text-neutral-400" />
-            </Button>
-
-            <Button key={"delete"} title={"Delete"} className="text-red-400">
-              <Trash2 strokeWidth={1} className="size-5 " />
-            </Button>
-          </div>
         </div>
       )}
     </div>
