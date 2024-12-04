@@ -59,68 +59,70 @@ export default function SideBar() {
 
   return (
     <aside className="select-none absolute shadow-md md:static md:shadow-none">
-      {!close && (
-        <div className="m-4 mr-0">
-          <div
-            onClick={() => setClose(!close)}
-            id="open-close-side-bar"
-            className="rounded-md size-8 p-1 flex items-center justify-center hover:bg-neutral-700/70 transition-colors cursor-pointer"
-          >
-            <PanelRight strokeWidth={1} className="rotate-180 size-6" />
-          </div>
+      <div className={twMerge("absolute inset-0 m-4 mr-0 ", close && "hidden")}>
+        <div
+          onClick={() => setClose(!close)}
+          id="open-close-side-bar"
+          className="rounded-md size-8 p-1 flex items-center justify-center hover:bg-neutral-700/70 transition-colors cursor-pointer"
+        >
+          <PanelRight strokeWidth={1} className="rotate-180 size-6" />
         </div>
-      )}
-      {close && (
-        <div className="flex">
-          <div
-            style={{ width }}
-            className={twMerge(
-              "min-w-[220px]  max-w-[410px] max-h-[100dvh] flex flex-col justify-between text-sm bg-neutral-800 border-r border-white/10 p-3 pb-1"
-            )}
-          >
-            <div>
-              <SideBarHeader close={close} setClose={setClose} />
-              <button className="flex w-full text-red-400 items-center gap-2 px-2 h-9 mb-2 rounded-md mt-5 hover:bg-neutral-700/70 transition-colors cursor-pointer">
-                <CirclePlus strokeWidth={1} />
-                <span className="font-medium">Add task</span>
-              </button>
+      </div>
 
-              <Button title="Search">
-                <Search strokeWidth={1} className="size-5 text-neutral-400" />
-              </Button>
-
-              {sidebarMainBtn.map(({ title, Icon, index, link }) => (
-                <Link href={`/${link}`} key={title}>
-                  <Button
-                    title={title}
-                    index={String(index)}
-                    className={`${
-                      pathname === link
-                        ? "text-red-400  bg-red-600/30 hover:bg-red-600/30"
-                        : "text-white  "
-                    }`}
-                  >
-                    <Icon
-                      strokeWidth={`${pathname === link ? 2 : 1}`}
-                      color={`${pathname === link ? "#f87171" : "#a1a1aa"}`}
-                      className="size-5"
-                    />
-                  </Button>
-                </Link>
-              ))}
-              <Projects width={width} />
-            </div>
-            <button className="flex w-full text-neutral-100 items-center gap-2 px-2 h-9 mb-2 rounded-md mt-5 hover:bg-neutral-700/70 transition-colors cursor-pointer">
-              <SwatchBook strokeWidth={1} className="size-5" />
-              <span className="font-normal">Browse templates</span>
+      <div
+        className={twMerge(
+          "flex transition-all duration-500",
+          close ? "min-w-[220px]  max-w-[410px]" : "-translate-x-[100%]"
+        )}
+      >
+        <div
+          style={{ width }}
+          className={twMerge(
+            " max-h-[100dvh] flex flex-col justify-between text-sm bg-neutral-800 border-r border-white/10 p-3 pb-1"
+          )}
+        >
+          <div>
+            <SideBarHeader close={close} setClose={setClose} />
+            <button className="flex w-full text-red-400 items-center gap-2 px-2 h-9 mb-2 rounded-md mt-5 hover:bg-neutral-700/70 transition-colors cursor-pointer">
+              <CirclePlus strokeWidth={1} />
+              <span className="font-medium">Add task</span>
             </button>
+
+            <Button title="Search">
+              <Search strokeWidth={1} className="size-5 text-neutral-400" />
+            </Button>
+
+            {sidebarMainBtn.map(({ title, Icon, index, link }) => (
+              <Link href={`/${link}`} key={title}>
+                <Button
+                  title={title}
+                  index={String(index)}
+                  className={`${
+                    pathname === link
+                      ? "text-red-400  bg-red-600/30 hover:bg-red-600/30"
+                      : "text-white  "
+                  }`}
+                >
+                  <Icon
+                    strokeWidth={`${pathname === link ? 2 : 1}`}
+                    color={`${pathname === link ? "#f87171" : "#a1a1aa"}`}
+                    className="size-5"
+                  />
+                </Button>
+              </Link>
+            ))}
+            <Projects width={width} />
           </div>
-          <div
-            onMouseDown={() => setTrack(true)}
-            className="w-1 h-screen bg-transparent hover:bg-neutral-600 transition-colors cursor-col-resize"
-          ></div>
+          <button className="flex w-full text-neutral-100 items-center gap-2 px-2 h-9 mb-2 rounded-md mt-5 hover:bg-neutral-700/70 transition-colors cursor-pointer">
+            <SwatchBook strokeWidth={1} className="size-5" />
+            <span className="font-normal">Browse templates</span>
+          </button>
         </div>
-      )}
+        <div
+          onMouseDown={() => setTrack(true)}
+          className="w-1 h-screen bg-transparent hover:bg-neutral-600 transition-colors cursor-col-resize"
+        ></div>
+      </div>
     </aside>
   );
 }

@@ -15,6 +15,7 @@ import {
   Archive,
   Trash2,
 } from "lucide-react";
+import Link from "next/link";
 
 const ProjectsSettings = [
   { Icon: ArrowUpFromLine, title: "Add project above" },
@@ -32,9 +33,10 @@ export default function ProjectsButton(
     title: string;
     width: string;
     index?: string;
+    link: string;
   } & ButtonHTMLAttributes<HTMLButtonElement>
 ) {
-  const { className, title, width, index, ...others } = props;
+  const { className, title, width, link, index, ...others } = props;
   const [hideProjectsSettings, setHideProjectsSettings] = useState(false);
   const settingsRef = useRef<HTMLDivElement>(null);
 
@@ -67,24 +69,28 @@ export default function ProjectsButton(
       )}
       <button
         className={twMerge(
-          "flex w-full text-white items-center justify-between pl-3 h-9 rounded-md  hover:bg-neutral-700/70 transition-colors cursor-pointer parent",
+          "flex w-full text-white rounded-md items-center gap-1 hover:bg-neutral-700  transition-colors cursor-pointer parent",
           className
         )}
         {...others}
       >
-        <div className="flex items-center gap-2">
-          <Hash strokeWidth={1} className="size-5 text-neutral-400" />
-          <span className="font-light">{title}</span>
-        </div>
+        <Link
+          href={link}
+          className=" flex rounded-md w-full pl-3 h-9  items-center justify-between "
+        >
+          <div className="flex items-center">
+            <Hash strokeWidth={1} className="size-5 text-neutral-400" />
+            <span className="font-light">{title}</span>
+          </div>
 
-        <span className="text-neutral-400 text-xs pr-3 font-light child2">
-          {index}
-        </span>
-
+          <span className="text-neutral-400 text-xs pr-3 font-light child2">
+            {index}
+          </span>
+        </Link>
         <div
           id="ellipsis"
           onClick={() => setHideProjectsSettings(!hideProjectsSettings)}
-          className="hover:bg-neutral-600/70 transition-colors p-0.5 mr-1 rounded flex items-center justify-center child"
+          className="hover:bg-neutral-600/70  transition-colors p-0.5 mr-1 rounded flex items-center justify-center child"
         >
           <Ellipsis strokeWidth={1} className="size-6 text-white" />
         </div>
