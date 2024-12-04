@@ -57,7 +57,7 @@ export default function Projects({ width }: { width: string }) {
               key={title}
               className={`${
                 pathname === link
-                  ? "text-red-400  bg-red-600/30 hover:bg-red-600/30"
+                  ? "text-red-300  bg-red-600/30 hover:bg-red-600/30"
                   : "text-white  "
               }`}
               title={title}

@@ -5,6 +5,7 @@ import profile from "@/assets/profile.jpg";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
 import Button from "./Button";
+import { usePathname } from "next/navigation";
 
 import {
   BadgeCheck,
@@ -42,6 +43,7 @@ const profileSettings = [
 const SideBarHeader: React.FC<SideBarHeaderProps> = ({ close, setClose }) => {
   const [openProfileSettings, setOpenProfileSettings] = useState(false);
   const projectsRef = useRef<HTMLDivElement>(null);
+  const pathname = usePathname().split("/").pop();
 
   useEffect(() => {
     const handleClickOutside = (event: MouseEvent) => {
@@ -157,7 +159,10 @@ const SideBarHeader: React.FC<SideBarHeaderProps> = ({ close, setClose }) => {
         <Link href="/notifications">
           <div
             id="notifications"
-            className="rounded-md size-8 p-1 flex items-center justify-center hover:bg-neutral-700/70 active:scale-95 transition-all cursor-pointer"
+            className={`rounded-md size-8 p-1 flex items-center justify-center hover:bg-neutral-700/70 active:scale-95 transition-all cursor-pointer ${
+              pathname === "notifications" &&
+              "bg-red-600/30 text-red-300 hover:bg-red-600/30"
+            }`}
           >
             <Bell strokeWidth={1} className="size-6" />
           </div>

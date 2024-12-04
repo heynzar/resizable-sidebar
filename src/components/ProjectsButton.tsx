@@ -78,8 +78,8 @@ export default function ProjectsButton(
           href={link}
           className=" flex rounded-md w-full pl-3 h-9  items-center justify-between "
         >
-          <div className="flex items-center">
-            <Hash strokeWidth={1} className="size-5 text-neutral-400" />
+          <div className="flex items-center gap-2">
+            <Hash strokeWidth={1} className="size-5 text-red-500" />
             <span className="font-light">{title}</span>
           </div>
 
