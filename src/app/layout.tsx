@@ -15,7 +15,7 @@ export const metadata: Metadata = {
     template: `Nzar Sidebar - %s`,
   },
   alternates: {
-    canonical: "https://nz-todoist.vercel.app/",
+    canonical: "https://nz-sidebar.vercel.app/",
   },
   description:
     "A fully customizable and resizable clone of Todoist.com's sidebar component, built from Scratch using TypeScript, Next.js, and TailwindCSS.",
@@ -30,23 +30,23 @@ export const metadata: Metadata = {
   ],
   publisher: "Nzar",
   openGraph: {
-    title: "Resizable Sidebar : todoist.com Clone",
+    title: "Dynamic and Resizable - Sidebar",
     description:
       "A fully customizable and resizable clone of Todoist.com's sidebar component, built from Scratch using TypeScript, Next.js, and TailwindCSS.",
-    url: "https://nz-todoist.vercel.app/",
+    url: "https://nz-sidebar.vercel.app/",
     type: "website",
     images: [
       {
         url: "/cover.png",
         width: 1200,
         height: 630,
-        alt: "Resizable Sidebar : todoist.com Clone",
+        alt: "Dynamic and Resizable - Sidebar",
       },
     ],
   },
   twitter: {
     card: "summary_large_image",
-    title: "Resizable Sidebar : todoist.com Clone",
+    title: "Dynamic and Resizable - Sidebar",
     description:
       "A fully customizable and resizable clone of Todoist.com's sidebar component, built from Scratch using TypeScript, Next.js, and TailwindCSS.",
     images: ["/cover.png"],
