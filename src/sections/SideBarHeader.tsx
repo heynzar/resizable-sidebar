@@ -3,7 +3,7 @@
 import Image from "next/image";
 import profile from "@/assets/profile.jpg";
 import Link from "next/link";
-import { useEffect, useRef, useState } from "react";
+import { HTMLAttributes, useEffect, useRef, useState } from "react";
 import Button from "../components/Button";
 import { usePathname } from "next/navigation";
 
@@ -15,18 +15,13 @@ import {
   ChevronDown,
   Gift,
   LogOut,
-  PanelRight,
   Plus,
   Printer,
   RefreshCcw,
   Settings,
   SquareActivity,
 } from "lucide-react";
-
-interface SideBarHeaderProps {
-  close: boolean;
-  setClose: (value: boolean) => void;
-}
+import { twMerge } from "tailwind-merge";
 
 const profileSettings = [
   { Icon: Settings, title: "Settings", index: "O then S" },
@@ -40,7 +35,8 @@ const profileSettings = [
   { Icon: LogOut, title: "Log out", index: "" },
 ];
 
-const SidebarHeader: React.FC<SideBarHeaderProps> = ({ close, setClose }) => {
+const SidebarHeader = (props: HTMLAttributes<HTMLDivElement>) => {
+  const { className, ...others } = props;
   const [openProfileSettings, setOpenProfileSettings] = useState(false);
   const projectsRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname().split("/").pop();
@@ -65,7 +61,14 @@ const SidebarHeader: React.FC<SideBarHeaderProps> = ({ close, setClose }) => {
   }, [openProfileSettings]);
 
   return (
-    <div id="header" className="flex justify-between items-center">
+    <div
+      id="header"
+      className={twMerge(
+        "flex justify-between items-center w-[calc(100%-35px)]",
+        className
+      )}
+      {...others}
+    >
       {openProfileSettings && (
         <div
           className="fixed inset-0 bg-black/20 z-10"
@@ -167,13 +170,6 @@ const SidebarHeader: React.FC<SideBarHeaderProps> = ({ close, setClose }) => {
             <Bell strokeWidth={1} className="size-6" />
           </div>
         </Link>
-        <div
-          onClick={() => setClose(!close)}
-          id="open-close-side-bar"
-          className="rounded-md size-8 p-1 flex items-center justify-center hover:bg-neutral-700/70 active:scale-95 transition-all cursor-pointer"
-        >
-          <PanelRight strokeWidth={1} className="rotate-180 size-6" />
-        </div>
       </div>
     </div>
   );

@@ -1,7 +1,7 @@
-import Button from "@/components/Button";
+"use client";
 import Link from "next/link";
 import { usePathname } from "next/navigation";
-
+import { HTMLAttributes } from "react";
 import {
   Calendar,
   CalendarDays,
@@ -9,6 +9,8 @@ import {
   LayoutGrid,
   Search,
 } from "lucide-react";
+
+import Button from "@/components/Button";
 
 const sidebarMainBtn = [
   { Icon: Inbox, title: "Inbox", index: 3, link: "inbox" },
@@ -22,10 +24,11 @@ const sidebarMainBtn = [
   },
 ];
 
-export default function Nav() {
+export default function Nav(props: HTMLAttributes<HTMLDivElement>) {
+  const { className, ...others } = props;
   const pathname = usePathname().split("/").pop();
   return (
-    <nav>
+    <nav className={className} {...others}>
       <Button title="Search">
         <Search strokeWidth={1} className="size-5 text-neutral-400" />
       </Button>
