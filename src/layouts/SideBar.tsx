@@ -2,36 +2,15 @@
 
 import { useState, useEffect } from "react";
 import { twMerge } from "tailwind-merge";
-import {
-  Calendar,
-  CalendarDays,
-  CirclePlus,
-  Inbox,
-  LayoutGrid,
-  PanelRight,
-  Search,
-} from "lucide-react";
-import Button from "@/components/Button";
-import SideBarHeader from "@/sections/SideBarHeader";
-import Link from "next/link";
-import { usePathname } from "next/navigation";
-import Projects from "@/sections/Projects";
-import SideBarFooter from "@/sections/SideBarFooter";
+import { PanelRight } from "lucide-react";
+import SideBarHeader from "@/sections/SidebarHeader";
 
-const sidebarMainBtn = [
-  { Icon: Inbox, title: "Inbox", index: 3, link: "inbox" },
-  { Icon: Calendar, title: "Today", index: 5, link: "today" },
-  { Icon: CalendarDays, title: "Upcoming", index: "", link: "upcoming" },
-  {
-    Icon: LayoutGrid,
-    title: "Filters & Labels",
-    index: "",
-    link: "filters-labels",
-  },
-];
+import Projects from "@/sections/Projects";
+import SideBarFooter from "@/sections/SidebarFooter";
+import AddButton from "@/components/AddButton";
+import Nav from "@/sections/Nav";
 
 export default function SideBar() {
-  const pathname = usePathname().split("/").pop();
   const [close, setClose] = useState(true);
   const [track, setTrack] = useState(false);
   const [width, setWidth] = useState(320);
@@ -92,34 +71,8 @@ export default function SideBar() {
           >
             <div>
               <SideBarHeader close={close} setClose={setClose} />
-              <button className="flex w-full text-red-400 items-center gap-2 px-2 h-9 mb-2 rounded-md mt-5 hover:bg-neutral-700/70 transition-colors cursor-pointer">
-                <CirclePlus strokeWidth={1} />
-                <span className="font-medium">Add task</span>
-              </button>
-
-              <Button title="Search">
-                <Search strokeWidth={1} className="size-5 text-neutral-400" />
-              </Button>
-
-              {sidebarMainBtn.map(({ title, Icon, index, link }) => (
-                <Link href={`/${link}`} key={title}>
-                  <Button
-                    title={title}
-                    index={String(index)}
-                    className={`${
-                      pathname === link
-                        ? "text-red-300  bg-red-600/30 hover:bg-red-600/30"
-                        : "text-white  "
-                    }`}
-                  >
-                    <Icon
-                      strokeWidth={`${pathname === link ? 2 : 1}`}
-                      color={`${pathname === link ? "#f87171" : "#a1a1aa"}`}
-                      className="size-5"
-                    />
-                  </Button>
-                </Link>
-              ))}
+              <AddButton />
+              <Nav />
               <Projects width={`${width}px`} />
             </div>
 

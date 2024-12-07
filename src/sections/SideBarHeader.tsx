@@ -40,7 +40,7 @@ const profileSettings = [
   { Icon: LogOut, title: "Log out", index: "" },
 ];
 
-const SideBarHeader: React.FC<SideBarHeaderProps> = ({ close, setClose }) => {
+const SidebarHeader: React.FC<SideBarHeaderProps> = ({ close, setClose }) => {
   const [openProfileSettings, setOpenProfileSettings] = useState(false);
   const projectsRef = useRef<HTMLDivElement>(null);
   const pathname = usePathname().split("/").pop();
@@ -179,4 +179,4 @@ const SideBarHeader: React.FC<SideBarHeaderProps> = ({ close, setClose }) => {
   );
 };
 
-export default SideBarHeader;
+export default SidebarHeader;
