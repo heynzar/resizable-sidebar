@@ -9,6 +9,7 @@ import Projects from "@/sections/Projects";
 import SideBarFooter from "@/sections/SidebarFooter";
 import AddButton from "@/components/AddButton";
 import Nav from "@/sections/Nav";
+import SidebarContent from "@/sections/SidebarContent";
 
 export default function SideBar() {
   const [close, setClose] = useState(true);
@@ -69,14 +70,15 @@ export default function SideBar() {
               "min-w-[220px]  max-w-[410px] max-h-[100dvh] flex flex-col justify-between text-sm bg-neutral-800 border-r border-white/10 p-3 pb-1"
             )}
           >
-            <div>
-              <SideBarHeader close={close} setClose={setClose} />
+            <SideBarHeader close={close} setClose={setClose} />
+
+            <SidebarContent className="border border-red-400">
               <AddButton />
               <Nav />
               <Projects width={`${width}px`} />
-            </div>
+            </SidebarContent>
 
-            <SideBarFooter />
+            <SideBarFooter className="mt-auto" />
           </div>
           <div
             onMouseDown={() => setTrack(true)}
