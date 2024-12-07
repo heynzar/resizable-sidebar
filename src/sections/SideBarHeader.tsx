@@ -4,7 +4,7 @@ import Image from "next/image";
 import profile from "@/assets/profile.jpg";
 import Link from "next/link";
 import { useEffect, useRef, useState } from "react";
-import Button from "./Button";
+import Button from "../components/Button";
 import { usePathname } from "next/navigation";
 
 import {
