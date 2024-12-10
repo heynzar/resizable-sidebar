@@ -1,19 +1,17 @@
 "use client";
 
-import { useState, useEffect, HTMLAttributes } from "react";
+import { useState, useEffect } from "react";
 import { twMerge } from "tailwind-merge";
 import { PanelRight } from "lucide-react";
 
-import SideBarHeader from "@/sections/SidebarHeader";
+import SidebarHeader from "@/sections/SidebarHeader";
 import Projects from "@/sections/Projects";
-import SideBarFooter from "@/sections/SidebarFooter";
+import SidebarFooter from "@/sections/SidebarFooter";
 import AddButton from "@/components/AddButton";
 import Nav from "@/sections/Nav";
 import SidebarContent from "@/sections/SidebarContent";
 
-export default function SideBar(props: HTMLAttributes<HTMLDivElement>) {
-  const { children, ...others } = props;
-
+export default function SideBar() {
   const [close, setClose] = useState(true);
   const [track, setTrack] = useState(false);
   const [width, setWidth] = useState(320);
@@ -46,10 +44,12 @@ export default function SideBar(props: HTMLAttributes<HTMLDivElement>) {
         transition: "0.5s ease",
       }}
       className="select-none absolute shadow-md md:static md:shadow-none"
-      {...others}
     >
       <div
-        className={twMerge("absolute inset-0 size-9 m-4", close && "hidden")}
+        className={twMerge(
+          "absolute inset-0 size-9 m-4 opacity-100 transition-all ",
+          close ? "-translate-x-10" : "translate-x-0 duration-700"
+        )}
       >
         <div
           onClick={() => setClose(!close)}
@@ -69,7 +69,7 @@ export default function SideBar(props: HTMLAttributes<HTMLDivElement>) {
         <div
           style={{ width: `${width}px` }}
           className={twMerge(
-            "relative min-w-[220px]  max-w-[410px] max-h-[100dvh] flex flex-col justify-between text-sm bg-neutral-800 border-r border-white/10 p-3 pb-1"
+            "relative min-w-[220px]  max-w-[410px] max-h-[100dvh] flex flex-col justify-between gap-5 text-sm bg-neutral-800 border-r border-white/10 p-3 pb-1"
           )}
         >
           <div
@@ -79,7 +79,8 @@ export default function SideBar(props: HTMLAttributes<HTMLDivElement>) {
           >
             <PanelRight strokeWidth={1} className="rotate-180 size-6" />
           </div>
-          <SideBarHeader />
+
+          <SidebarHeader />
 
           <SidebarContent>
             <AddButton />
@@ -87,7 +88,7 @@ export default function SideBar(props: HTMLAttributes<HTMLDivElement>) {
             <Projects width={`${width}px`} />
           </SidebarContent>
 
-          <SideBarFooter className="mt-auto" />
+          <SidebarFooter className="mt-auto" />
         </div>
         <div
           onMouseDown={() => setTrack(true)}
